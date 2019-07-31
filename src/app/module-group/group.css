@@ -1,0 +1,68 @@
+.post__title_link {
+    font-family: 'Fira Sans',sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #333;
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 36.4px;
+}
+
+.post__title_link:visited {
+    color: #487284;
+}
+
+.post__title_link:hover {
+    color: #548eaa;
+}
+
+.post__meta {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.post__date {
+    margin-left: 8px;
+}
+
+.post__user {
+    margin-left: 8px;
+}
+
+.content-list__item {
+    position: relative;
+    box-sizing: border-box;
+    padding: 10px 0 14px;
+}
+
+.content-list__item_post:first-child {
+    padding-top: 0;
+}
+.content-list__item_post {
+    padding: 20px 0;
+}
+
+.post__body {
+    margin-bottom: 24px;
+}
+.post__body_preview {
+    padding-top: 20px;
+}
+
+.post__text {
+    overflow: hidden;
+    font-size: 16px;
+    line-height: 1.56;
+    font-family: "-apple-system",BlinkMacSystemFont,Arial,sans-serif;
+}
+.post__text_html {
+    margin-right: -5px;
+    padding-right: 5px;
+    color: #222;
+    font-family: "-apple-system",BlinkMacSystemFont,Arial,sans-serif;
+}
+
+.post__more_btn {
+    margin-top: 17px;
+}

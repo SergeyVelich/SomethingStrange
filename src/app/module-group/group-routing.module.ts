@@ -7,6 +7,7 @@ import { GroupEditorComponent } from '../module-group/components/group-editor/gr
 
 const routes: Routes = [
     { path: '', component: GroupGridComponent, pathMatch: 'full' },
+    { path: 'page/:pageId', component: GroupGridComponent },
     { path: ':id/details', component: GroupDetailsComponent },
     { path: ':id/editor', component: GroupEditorComponent },
 ];

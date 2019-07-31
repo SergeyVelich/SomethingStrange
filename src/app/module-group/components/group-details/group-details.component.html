@@ -1,56 +1,34 @@
-<div class="article">
-  <div class="article-header">
-    <span>{{groupInfo.name}}</span>
-  </div>
-  <div class="article-date">
-    <span>{{groupInfo.date}}</span>
-  </div>
-  <div class="article-content">
-    <span>{{groupInfo.description}}</span>
-  </div>
-  <mat-card class=form>
-    <mat-card-header>
-      <!-- <div mat-card-avatar class="form-header-image"></div>
-      <mat-card-title *ngIf="groupInfo.id === 0">View record</mat-card-title> -->
-    </mat-card-header>
-    <mat-card-content>
-      <mat-form-field class=form-field>
-        <input matInput type="text" placeholder="Name" [(ngModel)]="groupInfo.name" name="name" autocomplete="off"
-          required>
-      </mat-form-field>
-      <mat-form-field class=form-field>
-        <mat-label>Date</mat-label>
-        <input matInput [(ngModel)]="groupInfo.date" [matDatepicker]="from" placeholder="Choose a date" name="date"
-          required>
-        <mat-datepicker-toggle matSuffix [for]="from"></mat-datepicker-toggle>
-        <mat-datepicker #from></mat-datepicker>
-      </mat-form-field>
-      <mat-form-field class=form-field>
-        <mat-label>Language</mat-label>
-        <input matInput type="text" placeholder="Language" [(ngModel)]="groupInfo.languageName" name="language"
-          autocomplete="off" required>
-      </mat-form-field>
-      <mat-form-field class=form-field>
-        <textarea matInput matInput cdkTextareaAutosize cdkAutosizeMinRows="2" cdkAutosizeMaxRows="5"
-          placeholder="Description" [(ngModel)]="groupInfo.description" name="description" autocomplete="off">
-      </textarea>
-      </mat-form-field>
-      <div class=upload-area>
-        <div class=upload-area-image-func>
-          <img #myImg class=upload-area-image [src]='imageToShow' [alt]='imageAlt' (click)='openImageModal()'
-            *ngIf="isImageLoaded; else noImageFound">
-          <ng-template #noImageFound>
-            <img class=upload-area-image src="assets/images/fallbackImage.png" alt="Fallbackimage">
-          </ng-template>
+<div class="wrapper">
+  <div class="post__wrapper">
+    <article class="post" lang="ru">
+      <h2 class="post__title">
+        <span class="post__title_text">{{groupInfo.name}}</span>
+      </h2>
+      <header class="post__meta">
+        <a href="https://habr.com/ru/users/antoshkka/" class="post__user_link" title="Автор публикации">
+          <img src="//habrastorage.org/getpro/habr/avatars/e9b/82a/c97/e9b82ac97979758d788ad516aa47f577.png" width="24"
+            height="24" class="user__image_pic user__image_pic_small">
+          <span class="post__user user__nickname user__nickname_small">antoshkka</span>
+        </a>
+        <span class="post__date">{{groupInfo.date | date: 'dd.MM.yyyy' }}</span>
+      </header>
+      <div class="post__body post__body_full">
+        <div class="post__text post__text_html">
+          {{groupInfo.description}}
         </div>
       </div>
-    </mat-card-content>
-  </mat-card>
+      <ul class="post__tags inline-list">
+        <li class="inline-list__item post__tag" *ngFor="let tag of groupInfo.tags">
+          <a href="https://habr.com/ru/company/yandex/" class="inline-list__item_link post__tag_link " rel="nofollow">
+            {{tag.name}}</a>
+        </li>
+      </ul>
+    </article>
+  </div>
   <button mat-button color="primary">
     <a [routerLink]="['/groups', groupInfo.id, 'editor']">Edit</a>
   </button>
   <button mat-button color="warn" (click)="deleteRecord(groupInfo)">Delete</button>
 </div>
 
-<app-image-modal #myModal [display]='block' [src]='imageToShow' [innerHTML]='imageAlt'>
-</app-image-modal>
+<ss-modal-image #myModal [display]='block' [src]='imageToShow' [innerHTML]='imageAlt'></ss-modal-image>

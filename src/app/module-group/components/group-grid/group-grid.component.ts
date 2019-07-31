@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { Language } from '../../models/language';
 import { GroupService } from '../../services/group.service'
 import { LanguageService } from '../../services/language.service';
@@ -6,6 +6,7 @@ import { AuthService } from '../../../module-account/services/auth/auth.service'
 import { Filter } from 'src/app/module-shared/models/filter';
 import { Sorter } from 'src/app/module-shared/models/sorter';
 import { Sort } from '@angular/material';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-group-grid',
@@ -17,10 +18,13 @@ export class GroupGridComponent implements OnInit {
   public groupData: Array<any>;
 
   //pagening
-  public length: number;
   public readonly defaultPageSize = 5;
   public readonly defaultPageIndex = 1;
   public readonly pageSizeOptions: number[] = [5, 10, 25];
+
+  pageIndex: number;
+  pageSize: number;
+  pageNumber: number;
 
   //filters
   languages: Language[];
@@ -32,20 +36,28 @@ export class GroupGridComponent implements OnInit {
   filterDateTo: Date;
   minFilterDate: Date;
   maxFilterDate: Date;
-  pageIndex: number;
-  pageSize: number;
 
   public displayedColumns: string[];
 
-  constructor(private groupService: GroupService, private languageService: LanguageService, private authService: AuthService) {
+  constructor(private route: ActivatedRoute, private groupService: GroupService, private languageService: LanguageService, private authService: AuthService) {
     this.filterName = '';
     this.filterLanguage = 0;
-    this.displayedColumns = ["date", "name", "language", "description", "image", "edit", "delete"];
-    this.pageIndex = this.defaultPageIndex;
+    this.pageIndex = this.defaultPageIndex; 
     this.pageSize = this.defaultPageSize;
   }
 
   ngOnInit() {
+    this.route.params.subscribe(params => {
+      debugger;
+      if( params['pageId'] ) {
+        this.pageIndex = +params['pageId'];
+      }
+      
+      this.doOnInit();
+    });
+  }
+  
+  doOnInit() {
     this.refreshTable();
 
     this.languageService.getAll(this.authService.authorizationHeaderValue).subscribe((response: any) => {
@@ -56,7 +68,7 @@ export class GroupGridComponent implements OnInit {
   public refreshTable() {
     let params: any = { filters: this.filters, sorting: this.sorting, pageIndex: this.pageIndex, pageSize: this.pageSize };
     this.groupService.getAll(this.authService.authorizationHeaderValue, params.filters, params.sorting, params.pageIndex, params.pageSize).subscribe((response: any) => this.groupData = response);
-    this.groupService.count(this.authService.authorizationHeaderValue, params.filters).subscribe((response: number) => this.length = response);
+    this.groupService.count(this.authService.authorizationHeaderValue, params.filters).subscribe((response: number) => this.pageNumber = Math.ceil(response/this.pageSize));
   };
 
   public deleteRecord(record) {
@@ -139,9 +151,9 @@ export class GroupGridComponent implements OnInit {
     this.refreshTable();
   }
 
-  onChangePage(event: any) {
-    this.pageIndex = event.pageIndex + 1;
-    this.pageSize = event.pageSize;
+  onChangePage(pageIndex: number) {
+    debugger;
+    this.pageIndex = pageIndex;
     this.refreshTable();
   }
 }

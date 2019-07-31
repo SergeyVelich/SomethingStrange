@@ -23,18 +23,53 @@
           </div>
           <ul class="post__tags inline-list">
             <li class="inline-list__item post__tag" *ngFor="let tag of groupInfo.tags">
-              <a href="https://habr.com/ru/company/yandex/" class="inline-list__item_link post__tag_link " rel="nofollow">
+              <a href="https://habr.com/ru/company/yandex/" class="inline-list__item_link post__tag_link "
+                rel="nofollow">
                 {{tag.name}}</a>
             </li>
           </ul>
         </article>
       </li>
     </ul>
+
+    <ul class="posts__pagination" id="nav-pagess">
+      <li class="arrows-pagination__item" *ngIf="pageIndex > 1">
+          <a [routerLink]="['/groups/page', pageIndex - 1]" class="arrows-pagination__item-link arrows-pagination__item-link_next" id="previous_page"
+          rel="">←&nbsp;</a>
+      </li>
+      <div class="toggle-menu toggle-menu_pagination">
+        <li class="toggle-menu__item toggle-menu__item_pagination" *ngIf="pageIndex > 2 && pageIndex == pageNumber">
+          <a [routerLink]="['/groups/page', pageIndex - 2]" class="toggle-menu__item-link toggle-menu__item-link_pagination">{{pageIndex-2}}</a>
+        </li>
+        <li class="toggle-menu__item toggle-menu__item_pagination" *ngIf="pageIndex > 1">
+          <a [routerLink]="['/groups/page', pageIndex - 1]" class="toggle-menu__item-link toggle-menu__item-link_pagination">{{pageIndex-1}}</a>
+        </li>
+        <li class="toggle-menu__item toggle-menu__item_pagination">
+          <span
+            class="toggle-menu__item-link toggle-menu__item-link_pagination toggle-menu__item-link_active">{{pageIndex}}
+          </span>
+        </li>
+        <li class="toggle-menu__item toggle-menu__item_pagination" *ngIf="pageNumber >= pageIndex + 1">
+          <a [routerLink]="['/groups/page', pageIndex + 1]" class="toggle-menu__item-link toggle-menu__item-link_pagination">{{pageIndex+1}}</a>
+        </li>
+        <li class="toggle-menu__item toggle-menu__item_pagination" *ngIf="pageNumber >= pageIndex + 2 && pageIndex == 1">
+          <a [routerLink]="['/groups/page', pageIndex + 2]" class="toggle-menu__item-link toggle-menu__item-link_pagination">{{pageIndex+2}}</a>
+        </li>
+      </div>
+      <li class="arrows-pagination__item" *ngIf="pageNumber >= pageIndex + 1">
+        <a [routerLink]="['/groups/page', pageIndex + 1]" class="arrows-pagination__item-link arrows-pagination__item-link_next" id="next_page"
+          rel="">&nbsp;→</a>
+      </li>
+    </ul>
   </div>
 </div>
 
-<mat-card class="form">
-  <!-- <div class="filter-leftcolumn">
+<!-- *ngIf="pageIndex > 1 && pageIndex == pageNumber"
+*ngIf="pageIndex > 1"
+*ngIf="pageNumber >= pageIndex + 1"     
+*ngIf="pageNumber >= pageIndex + 2 && pageIndex == 1" -->
+<!-- <mat-card class="form">
+  <div class="filter-leftcolumn">
     <mat-form-field class="filter-field">
       <mat-label>Date from</mat-label>
       <input matInput [(ngModel)]="filterDateFrom" [max]="maxFilterDate" [matDatepicker]="filterDateFromPicker"
@@ -79,8 +114,8 @@
         <mat-icon>close</mat-icon>
       </button>
     </mat-form-field>
-  </div> -->
-  <!-- <div class="table-group">
+  </div>
+  <div class="table-group">
     <table class="table-sort" matSort matSortActive="name" matSortDirection="desc" matSortDisableClear="true"
       (matSortChange)="sortData($event)">
       <thead>
@@ -112,629 +147,14 @@
         </tr>
       </tbody>
     </table>
-  </div> -->
-  <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
-    (page)="onChangePage($event)">
-  </mat-paginator>
-</mat-card>
-
-
-
-
-
-<!-- <section class="column-wrapper column-wrapper_lists js-sticky-wrapper">
-  <div class="content_left js-content_left">
-    <div class="page-header page-header_110">
-      <div class="dropdown dropdown_flows">
-        <button type="button" class="btn btn_large btn_flow-toggle" data-toggle="dropdown" tabindex="0"
-          aria-expanded="false"><span class="btn_inner">Все потоки<span
-              class="icon-svg_chevron icon-svg_chevron_flows"><svg class="icon-svg" width="28" height="16"
-                viewBox="0 0 28 16" aria-hidden="true" aria-labelledby="title" version="1.1" role="img">
-                <path
-                  d="M27.236.82c-1.048-1.048-2.516-1.132-3.804 0l-9.432 8.816-9.432-8.816c-1.288-1.132-2.756-1.048-3.804 0-1.052 1.048-.984 2.816 0 3.8l11.336 10.592c.524.524 1.212.788 1.9.788s1.376-.264 1.9-.788c0 0 10.352-9.608 11.336-10.592s1.052-2.752 0-3.8z">
-                </path>
-              </svg></span></span></button>
-        <div class="dropdown-container dropdown-container_flows">
-          <ul class="n-dropdown-menu n-dropdown-menu_flows">
-            <li class="n-dropdown-menu__item">
-              <a href="https://habr.com/ru/flows/develop/"
-                class="n-dropdown-menu__item-link n-dropdown-menu__item-link_flow">Разработка</a>
-            </li>
-            <li class="n-dropdown-menu__item">
-              <a href="https://habr.com/ru/flows/admin/"
-                class="n-dropdown-menu__item-link n-dropdown-menu__item-link_flow">Администрирование</a>
-            </li>
-            <li class="n-dropdown-menu__item">
-              <a href="https://habr.com/ru/flows/design/"
-                class="n-dropdown-menu__item-link n-dropdown-menu__item-link_flow">Дизайн</a>
-            </li>
-            <li class="n-dropdown-menu__item">
-              <a href="https://habr.com/ru/flows/management/"
-                class="n-dropdown-menu__item-link n-dropdown-menu__item-link_flow">Менеджмент</a>
-            </li>
-            <li class="n-dropdown-menu__item">
-              <a href="https://habr.com/ru/flows/marketing/"
-                class="n-dropdown-menu__item-link n-dropdown-menu__item-link_flow">Маркетинг</a>
-            </li>
-            <li class="n-dropdown-menu__item">
-              <a href="https://habr.com/ru/flows/geektimes/"
-                class="n-dropdown-menu__item-link n-dropdown-menu__item-link_flow">Гиктаймс</a>
-            </li>
-            <li class="n-dropdown-menu__item">
-              <a href="https://habr.com/ru/flows/misc/"
-                class="n-dropdown-menu__item-link n-dropdown-menu__item-link_flow">Разное</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="tabs">
-      <div class="tabs__level tabs-level_top tabs-menu">
-        <a href="https://habr.com/ru/top/" class="tabs-menu__item tabs-menu__item_link" rel="nofollow">
-          <h3 class="tabs-menu__item-text tabs-menu__item-text_active">
-            Лучшие
-          </h3>
-        </a>
-        <a href="https://habr.com/ru/all/" class="tabs-menu__item tabs-menu__item_link" rel="nofollow">
-          <h3 class="tabs-menu__item-text ">
-            Все подряд
-            <span class="tabs-menu__item-counter tabs-menu__item-counter_new">+59</span>
-          </h3>
-        </a>
-      </div>
-      <div class="tabs__level tabs__level_bottom">
-        <ul class="toggle-menu ">
-          <li class="toggle-menu__item">
-            <a href="https://habr.com/ru/top/" class="toggle-menu__item-link toggle-menu__item-link_active"
-              rel="nofollow" title="Лучшие публикации за сутки">
-              Сутки
-            </a>
-          </li>
-          <li class="toggle-menu__item">
-            <a href="https://habr.com/ru/top/weekly/" class="toggle-menu__item-link " rel="nofollow"
-              title="Лучшие публикации за неделю">
-              Неделя
-            </a>
-          </li>
-          <li class="toggle-menu__item">
-            <a href="https://habr.com/ru/top/monthly/" class="toggle-menu__item-link " rel="nofollow"
-              title="Лучшие публикации за месяц">
-              Месяц
-            </a>
-          </li>
-          <li class="toggle-menu__item">
-            <a href="https://habr.com/ru/top/yearly/" class="toggle-menu__item-link " rel="nofollow"
-              title="Лучшие публикации за год">
-              Год
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="posts_list">
-      <ul class="content-list content-list_posts shortcuts_items">
-        <li class="content-list__item content-list__item_post shortcuts_item" *ngFor="let groupInfo of groupData">
-          <article class="post post_preview" lang="ru">
-            <h2 class="post__title">
-              <a [routerLink]="['/groups', groupInfo.id, 'details']" class="post_title_link">{{groupInfo.name}}</a>
-            </h2>
-            <header class="post__meta">
-              <a href="https://habr.com/ru/users/antoshkka/" class="post__user-info user-info" title="Автор публикации">
-                <img src="//habrastorage.org/getpro/habr/avatars/e9b/82a/c97/e9b82ac97979758d788ad516aa47f577.png"
-                  width="24" height="24" class="user-info__image-pic user-info__image-pic_small">
-                <span class="user-info__nickname user-info__nickname_small">antoshkka</span>
-              </a>
-              <span class="post_date">{{groupInfo.date | date: 'dd.MM.yyyy' }}</span>
-            </header>
-            <ul class="post__marks inline-list"></ul>
-            <div class="post__body post__body_crop ">
-              <div class="post__text post__text-html js-mediator-article">{{groupInfo.description}}</div>
-
-              <a class="btn btn_x-large btn_outline_blue post__habracut-btn"
-                [routerLink]="['/groups', groupInfo.id, 'details']">read more →</a>
-            </div>
-            <ul class="post__hubs inline-list">
-              <li class="inline-list__item inline-list__item_hub" *ngFor="let tag of groupInfo.tags">
-                <a href="https://habr.com/ru/company/yandex/" class="inline-list__item-link hub-link " rel="nofollow"
-                  title="Вы не подписаны на этот хаб"
-                  onclick="if (typeof ga === 'function') { ga('send', 'event', 'hub', 'feed page', 'Блог компании Яндекс'); }">Блог
-                  компании Яндекс</a>,
-              </li>
-            </ul>
-          </article>
-        </ul>
-    </div>
-    <li class="content-list__item content-list__item_post shortcuts_item" id="post_458938">
-      <article class="post post_preview" lang="ru">
-
-
-
-
-
-
-
-
-        <footer class="post__footer">
-          <ul class="post-stats  js-user_" data-post-type="publish_corp" id="infopanel_post_458938">
-            <li class="post-stats__item post-stats__item_voting-wjt">
-              <div class="voting-wjt voting-wjt_post js-post-vote" data-id="458938" data-type="2">
-                <button type="button" class="btn voting-wjt__button " data-action="plus" onclick="posts_vote(this);"
-                  title="Голосовать могут только зарегистрированные пользователи " disabled=""><svg
-                    class="icon-svg_arrow-up" width="10" height="16">
-                    <use xlink:href="https://habr.com/images/1564419171/common-svg-sprite.svg#vote-arrow"></use>
-                  </svg></button>
-
-                <span class="voting-wjt__counter voting-wjt__counter_positive  js-score"
-                  title="Общий рейтинг 55: ↑53 и ↓2">+51</span>
-
-                <button type="button" class="btn voting-wjt__button " data-action="minus" onclick="posts_vote(this);"
-                  title="Голосовать могут только зарегистрированные пользователи " disabled=""><svg
-                    class="icon-svg_arrow-down" width="10" height="16">
-                    <use xlink:href="https://habr.com/images/1564419171/common-svg-sprite.svg#vote-arrow"></use>
-                  </svg></button>
-              </div>
-            </li>
-            <li class="post-stats__item post-stats__item_bookmark">
-              <button type="button" class="btn bookmark-btn bookmark-btn_post " data-post-type="publish_corp"
-                data-type="2" data-id="458938" data-action="add"
-                title="Только зарегистрированные пользователи могут добавлять публикации в закладки"
-                onclick="posts_add_to_favorite(this);" disabled="">
-                <span class="btn_inner"><svg class="icon-svg_bookmark" width="10" height="16">
-                    <use xlink:href="https://habr.com/images/1564419171/common-svg-sprite.svg#book"></use>
-                  </svg><span class="bookmark__counter js-favs_count"
-                    title="Количество пользователей, добавивших публикацию в закладки">45</span></span>
-              </button>
-            </li>
-
-            <li class="post-stats__item post-stats__item_views">
-              <div class="post-stats__views" title="Количество просмотров">
-                <svg class="icon-svg_views-count" width="21" height="12">
-                  <use xlink:href="https://habr.com/images/1564419171/common-svg-sprite.svg#eye"></use>
-                </svg><span class="post-stats__views-count">14,5k</span>
-              </div>
-            </li>
-
-            <li class="post-stats__item post-stats__item_comments">
-              <a href="https://habr.com/ru/company/yandex/blog/458938/#comments" class="post-stats__comments-link"
-                rel="nofollow">
-                <svg class="icon-svg_post-comments" width="16" height="16">
-                  <use xlink:href="https://habr.com/images/1564419171/common-svg-sprite.svg#comment"></use>
-                </svg><span class="post-stats__comments-count" title="Читать комментарии">141</span>
-              </a>
-            </li>
-          </ul>
-        </footer>
-      </article>
-    </li>
-    </ul>
-    <div class="page__footer">
-      <ul class="arrows-pagination">
-        <li class="arrows-pagination__item">
-          <span class="arrows-pagination__item-link">←&nbsp;сюда</span>
-        </li>
-        <li class="arrows-pagination__item">
-          <a class="arrows-pagination__item-link arrows-pagination__item-link_next" id="next_page" href="/ru/page2/"
-            rel=""><span>туда</span>&nbsp;→</a>
-        </li>
-      </ul>
-      <ul class="toggle-menu toggle-menu_pagination" id="nav-pagess">
-        <li class="toggle-menu__item toggle-menu__item_pagination">
-          <span class="toggle-menu__item-link toggle-menu__item-link_pagination toggle-menu__item-link_active">1</span>
-        </li>
-        <li class="toggle-menu__item toggle-menu__item_pagination">
-          <a href="/ru/page2/" class="toggle-menu__item-link toggle-menu__item-link_pagination">2</a>
-        </li>
-        <li class="toggle-menu__item toggle-menu__item_pagination">
-          <a href="/ru/page3/" class="toggle-menu__item-link toggle-menu__item-link_pagination">3</a>
-        </li>
-      </ul>
-    </div>
-  </div>
   </div>
 
-  <div class="sidebar_right sidebar_content-area js-sidebar_right sticky_init">
-    <div class="dfp-slot dfp-slot_top is_visible">
-      <div class="dfp-slot__banner" id="div-gpt-hh-atf" data-google-query-id="CMTex4bN3OMCFdKNsgodqgkFOA">
-
-        <div id="google_ads_iframe_/235032688/HH/HH01_ATF_Poster_0__container__" style="border: 0pt none;"><iframe
-            id="google_ads_iframe_/235032688/HH/HH01_ATF_Poster_0" title="3rd party ad content"
-            name="google_ads_iframe_/235032688/HH/HH01_ATF_Poster_0" width="300" height="600" scrolling="no"
-            marginwidth="0" marginheight="0" frameborder="0" srcdoc="" style="border: 0px; vertical-align: bottom;"
-            data-google-container-id="1" data-load-complete="true"></iframe></div>
-      </div>
-      <div class="dfp-slot__placeholder">
-        <span class="dfp-slot__placeholder-text">Эта шляпа совсем не шляпа, а Red Hat OpenShift.<a
-            href="https://u.tmtm.ru/Axoft_RedHat_adblock" class="btn btn_large btn_blue"
-            style="display:inline-flex!important;" target="_blank" rel=" noopener">Го в Docker</a></span>
-      </div>
-      <a href="https://tmtm.ru/services/advertising/" target="_blank" class="dfp-slot__label"
-        rel=" noopener">Реклама</a>
-
-    </div>
-
-    <div class="default-block default-block_sidebar">
-      <div class="default-block__header">
-        <h3 class="default-block__header-title">Спонсоры сообщества</h3>
-      </div>
-
-      <div class="default-block__content">
-        <ul class="content-list content-list_partners-block">
-          <li class="content-list__item content-list__item_partners-block">
-            <a href="https://u.tmtm.ru/avito_sponsor" rel="nofollow" class="partner-info">
-              <div class="partner-info__head">
-                <span class="partner-info__title">Авито</span>
-                <img src="https://habrastorage.org/webt/ak/c6/dj/akc6djcfuaqk9mroyelve5gdnl0.png"
-                  class="partner-info__image">
-              </div>
-
-              <div class="partner-info__description">
-                Главные по&nbsp;объявлениям в&nbsp;России. Укрощают высокие нагрузки.
-              </div>
-            </a>
-          </li>
-          <li class="content-list__item content-list__item_partners-block">
-            <a href="https://u.tmtm.ru/ruvds_sponsor" rel="nofollow" class="partner-info">
-              <div class="partner-info__head">
-                <span class="partner-info__title">RUVDS</span>
-                <img src="https://habrastorage.org/getpro/habr/company/5f8/ece/f58/5f8ecef58d48004476cb1e01c12f914e.png"
-                  class="partner-info__image">
-              </div>
-
-              <div class="partner-info__description">
-                Облачный провайдер. Поддерживает нас во&nbsp;всех начинаниях, но&nbsp;часто втягивает в&nbsp;авантюры.
-              </div>
-            </a>
-          </li>
-          <li class="content-list__item content-list__item_partners-block ">
-            <a href="https://u.tmtm.ru/tochka_sponsor" rel="nofollow" class="partner-info">
-              <div class="partner-info__head">
-                <span class="partner-info__title">Точка&nbsp;— банк для&nbsp;предпринимателей</span>
-                <img src="https://habrastorage.org/webt/ua/lg/h-/ualgh-uxdjkhu1ldizzbg1pclaw.jpeg"
-                  class="partner-info__image">
-              </div>
-
-              <div class="partner-info__description">
-                Помогает международному сотрудничеству айтишников своими валютными счетами.
-              </div>
-            </a>
-          </li>
-        </ul>
-      </div>
-
-      <div class="default-block__footer">
-        <a href="https://habr.com/ru/info/help/sponsorship-info/" class="default-block__footer_link">Как стать
-          спонсором?</a>
-      </div>
-    </div>
 
 
 
-    <div class="default-block default-block_sidebar">
-      <div class="default-block__header">
-        <h3 class="default-block__header-title">Потоки</h3>
-      </div>
-      <div class="default-block__content">
-        <ul class="stacked-menu">
-          <li class="stacked-menu__item stacked-menu__item_devided">
-            <a href="https://habr.com/ru/flows/develop/" class="stacked-menu__item-link stacked-menu__item-link_fira"
-              onclick="if (typeof ga === 'function') { ga('send', 'event', 'tm_block', 'flows', 'Разработка'); }">
-              <span class="stacked-menu__item-text">Разработка</span><strong class="stacked-menu__item-counter"
-                title="Количество новых публикаций за 24 часа">+40</strong>
-            </a>
-          </li>
-          <li class="stacked-menu__item stacked-menu__item_devided">
-            <a href="https://habr.com/ru/flows/admin/" class="stacked-menu__item-link stacked-menu__item-link_fira"
-              onclick="if (typeof ga === 'function') { ga('send', 'event', 'tm_block', 'flows', 'Администрирование'); }">
-              <span class="stacked-menu__item-text">Администрирование</span><strong class="stacked-menu__item-counter"
-                title="Количество новых публикаций за 24 часа">+14</strong>
-            </a>
-          </li>
-          <li class="stacked-menu__item stacked-menu__item_devided">
-            <a href="https://habr.com/ru/flows/design/" class="stacked-menu__item-link stacked-menu__item-link_fira"
-              onclick="if (typeof ga === 'function') { ga('send', 'event', 'tm_block', 'flows', 'Дизайн'); }">
-              <span class="stacked-menu__item-text">Дизайн</span><strong class="stacked-menu__item-counter"
-                title="Количество новых публикаций за 24 часа">+3</strong>
-            </a>
-          </li>
-          <li class="stacked-menu__item stacked-menu__item_devided">
-            <a href="https://habr.com/ru/flows/management/" class="stacked-menu__item-link stacked-menu__item-link_fira"
-              onclick="if (typeof ga === 'function') { ga('send', 'event', 'tm_block', 'flows', 'Менеджмент'); }">
-              <span class="stacked-menu__item-text">Менеджмент</span><strong class="stacked-menu__item-counter"
-                title="Количество новых публикаций за 24 часа">+6</strong>
-            </a>
-          </li>
-          <li class="stacked-menu__item stacked-menu__item_devided">
-            <a href="https://habr.com/ru/flows/marketing/" class="stacked-menu__item-link stacked-menu__item-link_fira"
-              onclick="if (typeof ga === 'function') { ga('send', 'event', 'tm_block', 'flows', 'Маркетинг'); }">
-              <span class="stacked-menu__item-text">Маркетинг</span><strong class="stacked-menu__item-counter"
-                title="Количество новых публикаций за 24 часа">+2</strong>
-            </a>
-          </li>
-          <li class="stacked-menu__item stacked-menu__item_devided">
-            <a href="https://habr.com/ru/flows/geektimes/" class="stacked-menu__item-link stacked-menu__item-link_fira"
-              onclick="if (typeof ga === 'function') { ga('send', 'event', 'tm_block', 'flows', 'Гиктаймс'); }">
-              <span class="stacked-menu__item-text">Гиктаймс</span><strong class="stacked-menu__item-counter"
-                title="Количество новых публикаций за 24 часа">+20</strong>
-            </a>
-          </li>
-          <li class="stacked-menu__item stacked-menu__item_devided">
-            <a href="https://habr.com/ru/flows/misc/" class="stacked-menu__item-link stacked-menu__item-link_fira"
-              onclick="if (typeof ga === 'function') { ga('send', 'event', 'tm_block', 'flows', 'Разное'); }">
-              <span class="stacked-menu__item-text">Разное</span><strong class="stacked-menu__item-counter"
-                title="Количество новых публикаций за 24 часа">+3</strong>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
 
-    <div class="default-block default-block_sidebar" id="companies_rating">
-      <div class="default-block__header">
-        <h3 class="default-block__header-title">Лучшие компании</h3>
-      </div>
+</mat-card> -->
 
-      <div class="default-block__content companies-rating">
-        <ul class="companies-rating__list">
-          <li class="companies-rating__item">
-            <div class="companies-rating__body">
-              <a class="companies-rating__avatar" href="/company/mailru/">
-                <img class="companies-rating__img"
-                  src="//habrastorage.org/getpro/habr/company/1c1/79c/e79/1c179ce792168371a7fe9556db69dc7d.png"
-                  width="32" height="32" role="img">
-              </a>
-              <a class="companies-rating__name" href="/company/mailru/">Mail.ru Group</a>
-            </div>
-
-            <div class="companies-rating__meta">
-              <span class="companies-rating__rating">940,68</span>
-            </div>
-          </li>
-          <li class="companies-rating__item">
-            <div class="companies-rating__body">
-              <a class="companies-rating__avatar" href="/company/ruvds/">
-                <img class="companies-rating__img"
-                  src="//habrastorage.org/getpro/habr/company/5f8/ece/f58/5f8ecef58d48004476cb1e01c12f914e.png"
-                  width="32" height="32" role="img">
-              </a>
-              <a class="companies-rating__name" href="/company/ruvds/">RUVDS.com</a>
-            </div>
-
-            <div class="companies-rating__meta">
-              <span class="companies-rating__rating">898,22</span>
-            </div>
-          </li>
-          <li class="companies-rating__item">
-            <div class="companies-rating__body">
-              <a class="companies-rating__avatar" href="/company/lamptest/">
-                <img class="companies-rating__img"
-                  src="//habrastorage.org/getpro/geektimes/company/faa/8f3/29f/faa8f329f54ab8821c7f2d1459ec2bda.jpg"
-                  width="32" height="32" role="img">
-              </a>
-              <a class="companies-rating__name" href="/company/lamptest/">LampTest</a>
-            </div>
-
-            <div class="companies-rating__meta">
-              <span class="companies-rating__rating">862,73</span>
-            </div>
-          </li>
-          <li class="companies-rating__item">
-            <div class="companies-rating__body">
-              <a class="companies-rating__avatar" href="/company/yandex/">
-                <img class="companies-rating__img"
-                  src="//habrastorage.org/getpro/habr/company/415/df8/480/415df848002687412f820fde43582545.png"
-                  width="32" height="32" role="img">
-              </a>
-              <a class="companies-rating__name" href="/company/yandex/">Яндекс</a>
-            </div>
-
-            <div class="companies-rating__meta">
-              <span class="companies-rating__rating">681,00</span>
-            </div>
-          </li>
-          <li class="companies-rating__item">
-            <div class="companies-rating__body">
-              <a class="companies-rating__avatar" href="/company/croc/">
-                <img class="companies-rating__img"
-                  src="//habrastorage.org/getpro/habr/company/db0/bb4/433/db0bb44336cf5515e560a7703c29ea41.png"
-                  width="32" height="32" role="img">
-              </a>
-              <a class="companies-rating__name" href="/company/croc/">КРОК</a>
-            </div>
-
-            <div class="companies-rating__meta">
-              <span class="companies-rating__rating">641,06</span>
-            </div>
-          </li>
-          <li class="companies-rating__item">
-            <div class="companies-rating__body">
-              <a class="companies-rating__avatar" href="/company/oleg-bunin/">
-                <img class="companies-rating__img"
-                  src="//habrastorage.org/getpro/habr/company/1f4/9d7/6f3/1f49d76f3de41e6327dd1a61a2580aa9.jpg"
-                  width="32" height="32" role="img">
-              </a>
-              <a class="companies-rating__name" href="/company/oleg-bunin/">Конференции Олега Бунина (Онтико)</a>
-            </div>
-
-            <div class="companies-rating__meta">
-              <span class="companies-rating__rating">611,23</span>
-            </div>
-          </li>
-          <li class="companies-rating__item">
-            <div class="companies-rating__body">
-              <a class="companies-rating__avatar" href="/company/pvs-studio/">
-                <img class="companies-rating__img"
-                  src="//habrastorage.org/getpro/habr/company/95a/244/327/95a244327fc36477b6048c0f8b67df8b.png"
-                  width="32" height="32" role="img">
-              </a>
-              <a class="companies-rating__name" href="/company/pvs-studio/">PVS-Studio</a>
-            </div>
-
-            <div class="companies-rating__meta">
-              <span class="companies-rating__rating">607,30</span>
-            </div>
-          </li>
-          <li class="companies-rating__item">
-            <div class="companies-rating__body">
-              <a class="companies-rating__avatar" href="/company/otus/">
-                <img class="companies-rating__img"
-                  src="//habrastorage.org/getpro/habr/company/bf4/7f2/121/bf47f2121a81597eae003fe20c76b3e6.jpg"
-                  width="32" height="32" role="img">
-              </a>
-              <a class="companies-rating__name" href="/company/otus/">OTUS. Онлайн-образование</a>
-            </div>
-
-            <div class="companies-rating__meta">
-              <span class="companies-rating__rating">575,27</span>
-            </div>
-          </li>
-          <li class="companies-rating__item">
-            <div class="companies-rating__body">
-              <a class="companies-rating__avatar" href="/company/habr/">
-                <img class="companies-rating__img"
-                  src="//habrastorage.org/getpro/habr/company/247/691/1ab/2476911ab60f354efcd642a770d875a3.png"
-                  width="32" height="32" role="img">
-              </a>
-              <a class="companies-rating__name" href="/company/habr/">ТechMedia</a>
-            </div>
-            <div class="companies-rating__meta">
-              <span class="companies-rating__rating">517,92</span>
-            </div>
-          </li>
-          <li class="companies-rating__item">
-            <div class="companies-rating__body">
-              <a class="companies-rating__avatar" href="/company/jugru/">
-                <img class="companies-rating__img"
-                  src="//habrastorage.org/getpro/habr/company/0a7/ce6/a86/0a7ce6a86556ff20579e90e6b732e663.png"
-                  width="32" height="32" role="img">
-              </a>
-              <a class="companies-rating__name" href="/company/jugru/">JUG Ru Group</a>
-            </div>
-            <div class="companies-rating__meta">
-              <span class="companies-rating__rating">517,73</span>
-            </div>
-          </li>
-        </ul>
-      </div>
-      <div class="default-block__footer">
-        <a href="/companies/" class="default-block__footer-link" rel="nofollow">Все компании</a>
-      </div>
-    </div>
-    <div class="js-ad_sticky">
-      <div class="default-block">
-        <div class="default-block__header">
-          <h3 class="default-block__header-title">Читают сейчас</h3>
-        </div>
-        <div class="default-block__content default-block__content_most-read" id="broadcast_most-read">
-          <ul class="content-list content-list_most-read">
-            <li class="content-list__item content-list__item_devided post-info">
-              <a href="https://habr.com/ru/post/461745/" class="post-info__title"
-                onclick="if (typeof ga === 'function') { ga('send', 'event', 'tm_block', 'most_read', '', '1'); }">Цены
-                российского черного рынка на пробив персональных данных (плюс ответ на ответ Тинькофф Банка)</a>
-              <div class="post-info__meta">
-                <span class="post-info__meta-item">
-                  <svg class="post-info__meta-icon icon-svg_views" width="16" height="9">
-                    <use xlink:href="https://habr.com/images/1564419171/common-svg-sprite.svg#eye"></use>
-                  </svg><span class="post-info__meta-counter post-info__meta-counter_small">9,4k</span>
-                </span>
-                <a href="https://habr.com/ru/post/461745/#comments" class="post-info__meta-item" rel="nofollow">
-                  <svg class="post-info__meta-icon icon-svg_comments" width="14" height="13">
-                    <use xlink:href="https://habr.com/images/1564419171/common-svg-sprite.svg#comment"></use>
-                  </svg><span class="post-info__meta-counter post-info__meta-counter_small">29</span>
-                </a>
-              </div>
-            </li>
-            <li class="content-list__item content-list__item_devided post-info">
-              <a href="https://habr.com/ru/news/t/461825/" class="post-info__title"
-                onclick="if (typeof ga === 'function') { ga('send', 'event', 'tm_block', 'most_read', '', '2'); }">Автовокзалы
-                восстали против билетных агрегаторов, требуя заблокировать 229 сайтов, включая BlaBlaCar и
-                «Яндекс.Автобусы»</a>
-              <div class="post-info__meta">
-                <span class="post-info__meta-item">
-                  <svg class="post-info__meta-icon icon-svg_views" width="16" height="9">
-                    <use xlink:href="https://habr.com/images/1564419171/common-svg-sprite.svg#eye"></use>
-                  </svg><span class="post-info__meta-counter post-info__meta-counter_small">10k</span>
-                </span>
-                <a href="https://habr.com/ru/news/t/461825/#comments" class="post-info__meta-item" rel="nofollow">
-                  <svg class="post-info__meta-icon icon-svg_comments" width="14" height="13">
-                    <use xlink:href="https://habr.com/images/1564419171/common-svg-sprite.svg#comment"></use>
-                  </svg><span class="post-info__meta-counter post-info__meta-counter_small">41</span>
-                </a>
-              </div>
-            </li>
-            <li class="content-list__item content-list__item_devided post-info">
-              <a href="https://habr.com/ru/post/461821/" class="post-info__title"
-                onclick="if (typeof ga === 'function') { ga('send', 'event', 'tm_block', 'most_read', '', '3'); }">Новая
-                иммунотерапия убрала все опухоли у женщины с метастатическим раком молочной железы</a>
-              <div class="post-info__meta">
-                <span class="post-info__meta-item">
-                  <svg class="post-info__meta-icon icon-svg_views" width="16" height="9">
-                    <use xlink:href="https://habr.com/images/1564419171/common-svg-sprite.svg#eye"></use>
-                  </svg><span class="post-info__meta-counter post-info__meta-counter_small">11,1k</span>
-                </span>
-                <a href="https://habr.com/ru/post/461821/#comments" class="post-info__meta-item" rel="nofollow">
-                  <svg class="post-info__meta-icon icon-svg_comments" width="14" height="13">
-                    <use xlink:href="https://habr.com/images/1564419171/common-svg-sprite.svg#comment"></use>
-                  </svg><span class="post-info__meta-counter post-info__meta-counter_small">14</span>
-                </a>
-              </div>
-            </li>
-            <li class="content-list__item content-list__item_devided post-info">
-              <a href="https://habr.com/ru/company/ruvds/blog/461663/" class="post-info__title"
-                onclick="if (typeof ga === 'function') { ga('send', 'event', 'tm_block', 'most_read', '', '4'); }">Рассказ
-                о том, как Linux привели в Windows</a>
-              <div class="post-info__meta">
-                <span class="post-info__meta-item">
-                  <svg class="post-info__meta-icon icon-svg_views" width="16" height="9">
-                    <use xlink:href="https://habr.com/images/1564419171/common-svg-sprite.svg#eye"></use>
-                  </svg><span class="post-info__meta-counter post-info__meta-counter_small">31,9k</span>
-                </span>
-                <a href="https://habr.com/ru/company/ruvds/blog/461663/#comments" class="post-info__meta-item"
-                  rel="nofollow">
-                  <svg class="post-info__meta-icon icon-svg_comments" width="14" height="13">
-                    <use xlink:href="https://habr.com/images/1564419171/common-svg-sprite.svg#comment"></use>
-                  </svg><span class="post-info__meta-counter post-info__meta-counter_small">133</span>
-                </a>
-              </div>
-            </li>
-            <li class="content-list__item content-list__item_devided post-info">
-              <a href="https://habr.com/ru/news/t/461853/" class="post-info__title"
-                onclick="if (typeof ga === 'function') { ga('send', 'event', 'tm_block', 'most_read', '', '5'); }">Светлое
-                будущее ИИ в России: тысячи компаний, 10&nbsp;000 разработчиков, свои процессоры. На это просят лишь
-                180&nbsp;млрд рублей</a>
-              <div class="post-info__meta">
-                <span class="post-info__meta-item">
-                  <svg class="post-info__meta-icon icon-svg_views" width="16" height="9">
-                    <use xlink:href="https://habr.com/images/1564419171/common-svg-sprite.svg#eye"></use>
-                  </svg><span class="post-info__meta-counter post-info__meta-counter_small">2,2k</span>
-                </span>
-                <a href="https://habr.com/ru/news/t/461853/#comments" class="post-info__meta-item" rel="nofollow">
-                  <svg class="post-info__meta-icon icon-svg_comments" width="14" height="13">
-                    <use xlink:href="https://habr.com/images/1564419171/common-svg-sprite.svg#comment"></use>
-                  </svg><span class="post-info__meta-counter post-info__meta-counter_small">12</span>
-                </a>
-              </div>
-            </li>
-            <li class="content-list__item content-list__item_devided post-info">
-              <a href="https://habr.com/ru/news/t/461843/" class="post-info__title"
-                onclick="if (typeof ga === 'function') { ga('send', 'event', 'tm_block', 'most_read', '', '6'); }">«Ростелеком»
-                закупил оборудования по закону Яровой на 3 млрд рублей — и это только начало</a>
-              <div class="post-info__meta">
-                <span class="post-info__meta-item">
-                  <svg class="post-info__meta-icon icon-svg_views" width="16" height="9">
-                    <use xlink:href="https://habr.com/images/1564419171/common-svg-sprite.svg#eye"></use>
-                  </svg><span class="post-info__meta-counter post-info__meta-counter_small">2,5k</span>
-                </span>
-                <a href="https://habr.com/ru/news/t/461843/#comments" class="post-info__meta-item" rel="nofollow">
-                  <svg class="post-info__meta-icon icon-svg_comments" width="14" height="13">
-                    <use xlink:href="https://habr.com/images/1564419171/common-svg-sprite.svg#comment"></use>
-                  </svg><span class="post-info__meta-counter post-info__meta-counter_small">1</span>
-                </a>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section> -->
+<!-- <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+  (page)="onChangePage($event)">
+</mat-paginator> -->

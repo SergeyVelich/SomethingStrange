@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, Input, ElementRef } from '@angular/core';
 
 @Component({
-  selector: 'app-image-modal',
+  selector: 'ss-modal-image',
   templateUrl: './image-modal.component.html',
   styleUrls: ['./image-modal.component.css']
 })

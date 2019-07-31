@@ -1,3 +1,5 @@
+@import '../../group.css';
+
 .wrapper {
     position: relative;
     display: table;
@@ -9,151 +11,95 @@
     background: #fff;
 }
 
-.post__title_link {
+.arrows-pagination__item:last-child {
+    margin-right: 0;
+}
+.arrows-pagination__item {
+    position: relative;
+    display: block;
+    margin: 0 7px;
+}
+.arrows-pagination__item-link {
+    font-weight: 500;
     font-family: 'Fira Sans',sans-serif;
+}
+.arrows-pagination__item-link {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    color: #333;
-    font-weight: 500;
-    font-size: 28px;
-    line-height: 36.4px;
+    color: #464646;
+    font-weight: 700;
+    font-size: 26px;
+    text-decoration: none;
+    font-family: "-apple-system",BlinkMacSystemFont,Arial,sans-serif;
 }
-
-.post__title_link:visited {
-    color: #487284;
-}
-
-.post__title_link:hover {
+button.arrows-pagination__item-link {
     color: #548eaa;
 }
 
-.post__meta {
+a.arrows-pagination__item-link {
+    color: #548eaa;
+}
+
+.toggle-menu_pagination {
+    z-index: 5;
+}
+.posts__pagination{
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    list-style: none;  
+}
+.toggle-menu {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid #d5dddf;
+    border-radius: 3px;
+    list-style: none;
+}
+
+.toggle-menu__item {
+    position: relative;
+    display: block;
+    margin: 0;
+    height: 100%;
+}
+
+.toggle-menu__item-link {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    position: relative;
+    z-index: 2;
     display: flex;
     align-items: center;
-    margin-bottom: 5px;
-}
-
-.post__date {
-    margin-left: 8px;
-}
-
-.post__user {
-    margin-left: 8px;
-}
-
-.content-list__item {
-    position: relative;
-    box-sizing: border-box;
-    padding: 10px 0 14px;
-}
-
-.content-list__item_post:first-child {
-    padding-top: 0;
-}
-.content-list__item_post {
-    padding: 20px 0;
-}
-
-.post__body {
-    margin-bottom: 24px;
-}
-.post__body_preview {
-    padding-top: 20px;
-}
-
-.post__text {
-    overflow: hidden;
-    font-size: 16px;
-    line-height: 1.56;
+    justify-content: center;
+    margin: -1px;
+    padding: 0 18px;
+    height: 40px;
+    border: 2px solid transparent;
+    border-radius: 3px;
+    color: #6c797f;
+    font-weight: 700;
+    font-size: 13px;
     font-family: "-apple-system",BlinkMacSystemFont,Arial,sans-serif;
-}
-.post__text_html {
-    margin-right: -5px;
-    padding-right: 5px;
-    color: #222;
-    font-family: "-apple-system",BlinkMacSystemFont,Arial,sans-serif;
+    text-decoration: none;
+    cursor: pointer;
 }
 
-.post__more_btn {
-    margin-top: 17px;
+.toggle-menu__item-link:hover {
+    color: #4d80aa;
+    text-decoration: none;
 }
 
-
-
-
-
-
-
-
-
-
-/* .form{
-    width: 100%;
-    min-height: 75vh;
+.toggle-menu__item-link_active, .toggle-menu__item-link.active {
+    border-color: #77a8d0;
+    color: #4d80aa;
 }
 
-.filter-leftcolumn{
-    float: left;
-    width: 40%;
-    margin-left: 0;
+.toggle-menu__item-link_pagination {
+    padding: 0 16px;
+    font-size: 14px;
+    cursor: pointer;
 }
-  
-.filter-rightcolumn{
-    float: right;
-    width: 40%;
-    margin-right: 0;
-}
-
-.filter-field{
-    width: 100%;
-    height: 100%; 
-    min-width: 150px;
-}
-
-.table-group{
-    width: 100%;
-    overflow-x: auto;    
-}
-
-.table-sort th[role=columnheader]{
-    overflow: hidden; 
-    text-overflow:ellipsis;
-}
-
-.table-sort .colName{
-    min-width: 10px;
-    max-width: 30%;
-    overflow: hidden; 
-    text-overflow:ellipsis;
-}
-
-.table-sort .colDate{
-    width: 20px;
-    text-align: center;
-}
-
-.table-sort .colLang{
-    width: 20px;
-    text-align: center;
-}
-
-.table-sort .colDesc{
-    min-width: 30px;
-    max-width: 30%;
-    overflow: hidden; 
-    text-overflow:ellipsis;
-}
-
-.table-sort .colImage{
-    width: 20px;
-}
-
-.table-sort .colAction{
-    width: 20px;
-}
-
-.table-sort .colAction button{
-    display: block;
-    font-family:Arial, Helvetica, sans-serif;
-    font-size:12px;
-} */

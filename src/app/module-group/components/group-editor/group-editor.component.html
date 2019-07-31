@@ -1,0 +1,63 @@
+<mat-card class=form>
+  <mat-card-header>
+    <div mat-card-avatar class="form-header-image"></div>
+    <mat-card-title *ngIf="groupInfo.id === 0">Add record</mat-card-title>
+    <mat-card-title *ngIf="groupInfo.id != 0">Edit record</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-form-field class=form-field>
+      <input matInput type="text" placeholder="Name" [(ngModel)]="groupInfo.name" name="name" autocomplete="off"
+        required>
+    </mat-form-field>
+    <mat-form-field class=form-field>
+      <mat-label>Date</mat-label>
+      <input matInput [(ngModel)]="groupInfo.date" [matDatepicker]="from" placeholder="Choose a date" name="date"
+        required>
+      <mat-datepicker-toggle matSuffix [for]="from"></mat-datepicker-toggle>
+      <mat-datepicker #from></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field class=form-field>
+      <mat-label>Language</mat-label>
+      <mat-select [(ngModel)]="groupInfo.languageId" name="languageId">
+        <mat-option *ngFor="let language of languages" [value]="language.id">{{language.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class=form-field>
+      <textarea matInput matInput cdkTextareaAutosize cdkAutosizeMinRows="2" cdkAutosizeMaxRows="5"
+        placeholder="Description" [(ngModel)]="groupInfo.description" name="description" autocomplete="off">
+      </textarea>
+    </mat-form-field>
+    <div class=upload-area>
+      <input #fileInput type="file" accept='image/*' (change)="preview(fileInput.files)" style="display: none" />
+      <div class=upload-area-image-func>
+        <img #myImg class=upload-area-image [src]="imageToShow" alt="Place image title"
+          (click)="myModal.style.display='block'; modalImg.src=myImg.src; caption.innerHTML=myImg.alt;"
+          *ngIf="isImageLoaded; else noImageFound">
+        <ng-template #noImageFound>
+          <img class=upload-area-image src="assets/images/fallbackImage.png" alt="Fallbackimage">
+        </ng-template>
+        <button class=upload-area-button-download (click)="fileInput.click()">
+          <span>Download</span>
+        </button>
+      </div>
+      <div class="error-message" *ngIf="message">
+        {{message}}
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <div class="buttons-panel">
+      <button mat-button type="button" class="btn btn-info mat-card-actions-leftcolumn"
+        (click)="newRecord($event)">{{buttonTextClose}}</button>
+      <button mat-button type="button" class="btn btn-info mat-card-actions-rightcolumn"
+        (click)="saveRecord($event)">{{buttonTextSave}}</button>
+    </div>
+  </mat-card-actions>
+</mat-card>
+
+<!-- The Modal -->
+<div #myModal class="modal">
+  <span class="close" (click)="myModal.style.display = 'none'">&times;</span>
+  <img #modalImg class="modal-content">
+  <div #caption class="caption"></div>
+</div>

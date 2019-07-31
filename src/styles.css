@@ -1,0 +1,147 @@
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
+*, *:before, *:after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font-family: inherit;
+    vertical-align: baseline;
+}
+
+html, body {
+    height: 100%;
+  }
+
+a {
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+ul {
+    display: block;
+    list-style: none;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+
+table {
+    background: #fff;
+    max-width: 100%;
+    border-spacing: 0;
+    width: 100%;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-collapse: separate;
+    *border-collapse: collapsed;
+    -webkit-box-shadow: 0 0 4px rgba(0,0,0,0.10);
+    -moz-box-shadow: 0 0 4px rgba(0,0,0,0.10);
+    box-shadow: 0 0 4px rgba(0,0,0,0.10);
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+table thead:first-child tr th, table thead:first-child tr td, table thead:first-child tr:first-child th, table tbody:first-child tr:first-child th, table tbody:first-child tr:first-child td {
+    border-top: 0;
+}
+
+table td {
+    vertical-align: top;
+    text-align: left;
+}
+
+table th {
+    background: #eee;
+    background: -webkit-gradient(linear, left top, left bottom, from(#f6f6f6), to(#eee));
+    background: -moz-linear-gradient(top, #f6f6f6, #eee);
+    text-shadow: 0 1px 0 #fff;
+    font-weight: bold;
+    vertical-align: center;
+    text-align: center;
+}
+table th, table td {
+    padding: 8px;
+    line-height: 18px;
+    border-top: 1px solid #ddd;
+}
+
+.error-message{
+    color:red;
+}
+
+.mat-sort-header-container {
+    align-items: center;
+}
+
+th[role=columnheader]:not(.no-sort) {
+    cursor: pointer;
+}
+
+th[role=columnheader]:not(.no-sort):hover:after {
+    visibility: visible;
+    opacity: 1;
+} 
+
+
+
+.inline-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.btn {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    border: 0;
+    background-color: transparent;
+    box-shadow: none;
+    padding: 0;
+    cursor: pointer;
+    user-select: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    touch-action: manipulation;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    font-weight: 500;
+    font-family: "-apple-system",BlinkMacSystemFont,Arial,sans-serif;
+    box-sizing: border-box;
+    white-space: nowrap;
+}
+.btn:link:visited {
+    color: inherit;
+}
+.btn_x-large {
+    padding: 0 13px;
+    height: 36px;
+    border-radius: 3px;
+    font-size: 13px;
+}
+.btn_outline_blue {
+    border: 1px solid #75aeca;
+    background-color: transparent;
+    color: #548eaa;
+}

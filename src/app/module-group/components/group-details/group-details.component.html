@@ -1,0 +1,56 @@
+<div class="article">
+  <div class="article-header">
+    <span>{{groupInfo.name}}</span>
+  </div>
+  <div class="article-date">
+    <span>{{groupInfo.date}}</span>
+  </div>
+  <div class="article-content">
+    <span>{{groupInfo.description}}</span>
+  </div>
+  <mat-card class=form>
+    <mat-card-header>
+      <!-- <div mat-card-avatar class="form-header-image"></div>
+      <mat-card-title *ngIf="groupInfo.id === 0">View record</mat-card-title> -->
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field class=form-field>
+        <input matInput type="text" placeholder="Name" [(ngModel)]="groupInfo.name" name="name" autocomplete="off"
+          required>
+      </mat-form-field>
+      <mat-form-field class=form-field>
+        <mat-label>Date</mat-label>
+        <input matInput [(ngModel)]="groupInfo.date" [matDatepicker]="from" placeholder="Choose a date" name="date"
+          required>
+        <mat-datepicker-toggle matSuffix [for]="from"></mat-datepicker-toggle>
+        <mat-datepicker #from></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field class=form-field>
+        <mat-label>Language</mat-label>
+        <input matInput type="text" placeholder="Language" [(ngModel)]="groupInfo.languageName" name="language"
+          autocomplete="off" required>
+      </mat-form-field>
+      <mat-form-field class=form-field>
+        <textarea matInput matInput cdkTextareaAutosize cdkAutosizeMinRows="2" cdkAutosizeMaxRows="5"
+          placeholder="Description" [(ngModel)]="groupInfo.description" name="description" autocomplete="off">
+      </textarea>
+      </mat-form-field>
+      <div class=upload-area>
+        <div class=upload-area-image-func>
+          <img #myImg class=upload-area-image [src]='imageToShow' [alt]='imageAlt' (click)='openImageModal()'
+            *ngIf="isImageLoaded; else noImageFound">
+          <ng-template #noImageFound>
+            <img class=upload-area-image src="assets/images/fallbackImage.png" alt="Fallbackimage">
+          </ng-template>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <button mat-button color="primary">
+    <a [routerLink]="['/groups', groupInfo.id, 'editor']">Edit</a>
+  </button>
+  <button mat-button color="warn" (click)="deleteRecord(groupInfo)">Delete</button>
+</div>
+
+<app-image-modal #myModal [display]='block' [src]='imageToShow' [innerHTML]='imageAlt'>
+</app-image-modal>

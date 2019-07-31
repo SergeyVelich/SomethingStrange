@@ -1,0 +1,159 @@
+.wrapper {
+    position: relative;
+    display: table;
+    min-width: 1024px;
+    width: 100%;
+    height: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+    background: #fff;
+}
+
+.post__title_link {
+    font-family: 'Fira Sans',sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #333;
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 36.4px;
+}
+
+.post__title_link:visited {
+    color: #487284;
+}
+
+.post__title_link:hover {
+    color: #548eaa;
+}
+
+.post__meta {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.post__date {
+    margin-left: 8px;
+}
+
+.post__user {
+    margin-left: 8px;
+}
+
+.content-list__item {
+    position: relative;
+    box-sizing: border-box;
+    padding: 10px 0 14px;
+}
+
+.content-list__item_post:first-child {
+    padding-top: 0;
+}
+.content-list__item_post {
+    padding: 20px 0;
+}
+
+.post__body {
+    margin-bottom: 24px;
+}
+.post__body_preview {
+    padding-top: 20px;
+}
+
+.post__text {
+    overflow: hidden;
+    font-size: 16px;
+    line-height: 1.56;
+    font-family: "-apple-system",BlinkMacSystemFont,Arial,sans-serif;
+}
+.post__text_html {
+    margin-right: -5px;
+    padding-right: 5px;
+    color: #222;
+    font-family: "-apple-system",BlinkMacSystemFont,Arial,sans-serif;
+}
+
+.post__more_btn {
+    margin-top: 17px;
+}
+
+
+
+
+
+
+
+
+
+
+/* .form{
+    width: 100%;
+    min-height: 75vh;
+}
+
+.filter-leftcolumn{
+    float: left;
+    width: 40%;
+    margin-left: 0;
+}
+  
+.filter-rightcolumn{
+    float: right;
+    width: 40%;
+    margin-right: 0;
+}
+
+.filter-field{
+    width: 100%;
+    height: 100%; 
+    min-width: 150px;
+}
+
+.table-group{
+    width: 100%;
+    overflow-x: auto;    
+}
+
+.table-sort th[role=columnheader]{
+    overflow: hidden; 
+    text-overflow:ellipsis;
+}
+
+.table-sort .colName{
+    min-width: 10px;
+    max-width: 30%;
+    overflow: hidden; 
+    text-overflow:ellipsis;
+}
+
+.table-sort .colDate{
+    width: 20px;
+    text-align: center;
+}
+
+.table-sort .colLang{
+    width: 20px;
+    text-align: center;
+}
+
+.table-sort .colDesc{
+    min-width: 30px;
+    max-width: 30%;
+    overflow: hidden; 
+    text-overflow:ellipsis;
+}
+
+.table-sort .colImage{
+    width: 20px;
+}
+
+.table-sort .colAction{
+    width: 20px;
+}
+
+.table-sort .colAction button{
+    display: block;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:12px;
+} */

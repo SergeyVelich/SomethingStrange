@@ -14,6 +14,7 @@ import { CompareValidatorDirective } from './directives/compare-validator.direct
 import { PasswordValidatorDirective } from './directives/password-validator.directive';
 import { InputButtonClearComponent } from './components/input-button-clear/input-button-clear.component';
 import { ImageModalComponent } from './components/image-modal/image-modal.component';
+import { PaginatorComponent } from './components/paginator/paginator.component';
 
 import {
   MatButtonModule, MatMenuModule, MatDatepickerModule, MatNativeDateModule, MatCardModule, MatSidenavModule, MatFormFieldModule,
@@ -64,6 +65,7 @@ const modules = [
     PasswordValidatorDirective,
     InputButtonClearComponent,
     ImageModalComponent,
+    PaginatorComponent,
   ],
   imports: [
     CommonModule,
@@ -85,6 +87,7 @@ const modules = [
     modules,
     InputButtonClearComponent,
     ImageModalComponent,
+    PaginatorComponent,
   ],
   providers: [
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },

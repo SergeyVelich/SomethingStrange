@@ -3,32 +3,30 @@
     <article class="post" lang="ru">
       <h2 class="post__title">
         <span class="post__title_text">{{groupInfo.name}}</span>
+        <div class="post__buttons">
+            <a [routerLink]="['/groups', groupInfo.id, 'editor']"> <img src="assets/images/icon-edit.png" width="24"
+              height="24"></a>
+          <a (click)="deleteRecord(groupInfo)"><img src="assets/images/icon-remove.png" width="24" height="24"></a>
+        </div>
       </h2>
       <header class="post__meta">
-        <a href="https://habr.com/ru/users/antoshkka/" class="post__user_link" title="Автор публикации">
-          <img src="//habrastorage.org/getpro/habr/avatars/e9b/82a/c97/e9b82ac97979758d788ad516aa47f577.png" width="24"
-            height="24" class="user__image_pic user__image_pic_small">
+        <a href="https://www.facebook.com/tucker.serega" class="post__user_link">
+          <img src="assets/images/user1.png" class="user__image_pic user__image_pic_small" width="24" height="24">
           <span class="post__user user__nickname user__nickname_small">antoshkka</span>
         </a>
         <span class="post__date">{{groupInfo.date | date: 'dd.MM.yyyy' }}</span>
       </header>
       <div class="post__body post__body_full">
-        <div class="post__text post__text_html">
-          {{groupInfo.description}}
-        </div>
+        <div class="post__text post__text_html" [innerHTML]="groupInfo.description"></div>
       </div>
       <ul class="post__tags inline-list">
         <li class="inline-list__item post__tag" *ngFor="let tag of groupInfo.tags">
-          <a href="https://habr.com/ru/company/yandex/" class="inline-list__item_link post__tag_link " rel="nofollow">
+          <a href="#" class="inline-list__item_link post__tag_link " rel="nofollow">
             {{tag.name}}</a>
         </li>
       </ul>
     </article>
   </div>
-  <button mat-button color="primary">
-    <a [routerLink]="['/groups', groupInfo.id, 'editor']">Edit</a>
-  </button>
-  <button mat-button color="warn" (click)="deleteRecord(groupInfo)">Delete</button>
 </div>
 
-<ss-modal-image #myModal [display]='block' [src]='imageToShow' [innerHTML]='imageAlt'></ss-modal-image>
+<ss-modal-image #myModal [src]='imageToShow' [innerHTML]='imageAlt'></ss-modal-image>

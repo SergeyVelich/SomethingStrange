@@ -78,82 +78,76 @@ export class GroupGridComponent implements OnInit {
       });   
   };
 
-  onChangeFilterName(filterValue: string) {
-    let name = 'name';
-    if(filterValue == null || filterValue.trim().length == 0){
-      this.onClearFilter(name);
-    }
-    else{
-      let value = filterValue.toLowerCase();
-      let operation = '=';
+  // onChangeFilterName(filterValue: string) {
+  //   let name = 'name';
+  //   if(filterValue == null || filterValue.trim().length == 0){
+  //     this.onClearFilter(name);
+  //   }
+  //   else{
+  //     let value = filterValue.toLowerCase();
+  //     let operation = '=';
   
-      this.onChangeFilter(new Filter(name, value, operation));           
-    }
-  }
+  //     this.onChangeFilter(new Filter(name, value, operation));           
+  //   }
+  // }
 
-  onChangeFilterLanguage(filterValue: number) {
-    let name = 'languageId';
-    if(filterValue == null || filterValue == 0){
-      this.onClearFilter(name);
-    }
-    else{
-      let value = filterValue.toString();
-      let operation = '=';
+  // onChangeFilterLanguage(filterValue: number) {
+  //   let name = 'languageId';
+  //   if(filterValue == null || filterValue == 0){
+  //     this.onClearFilter(name);
+  //   }
+  //   else{
+  //     let value = filterValue.toString();
+  //     let operation = '=';
   
-      this.onChangeFilter(new Filter(name, value, operation));           
-    }
-  }
+  //     this.onChangeFilter(new Filter(name, value, operation));           
+  //   }
+  // }
 
-  onChangeFilterDateFrom(filterValue: Date) {
-    let name = 'dateFrom';
-    this.minFilterDate = this.filterDateFrom;
-    if(filterValue == null){
-      this.onClearFilter(name);
-    }
-    else{
-      let value = new Date(filterValue).toUTCString();
-      let operation = '=';
+  // onChangeFilterDateFrom(filterValue: Date) {
+  //   let name = 'dateFrom';
+  //   this.minFilterDate = this.filterDateFrom;
+  //   if(filterValue == null){
+  //     this.onClearFilter(name);
+  //   }
+  //   else{
+  //     let value = new Date(filterValue).toUTCString();
+  //     let operation = '=';
   
-      this.onChangeFilter(new Filter(name, value, operation));           
-    }
-  }
+  //     this.onChangeFilter(new Filter(name, value, operation));           
+  //   }
+  // }
   
-  onChangeFilterDateTo(filterValue: Date) {
-    let name = 'dateTo';
-    this.maxFilterDate = this.filterDateTo;
-    if(filterValue == null){
-      this.onClearFilter(name);
-    }
-    else{
-      let value = new Date(filterValue).toUTCString();
-      let operation = '=';
+  // onChangeFilterDateTo(filterValue: Date) {
+  //   let name = 'dateTo';
+  //   this.maxFilterDate = this.filterDateTo;
+  //   if(filterValue == null){
+  //     this.onClearFilter(name);
+  //   }
+  //   else{
+  //     let value = new Date(filterValue).toUTCString();
+  //     let operation = '=';
   
-      this.onChangeFilter(new Filter(name, value, operation));           
-    }
-  }
+  //     this.onChangeFilter(new Filter(name, value, operation));           
+  //   }
+  // }
 
-  onChangeFilter(filter: Filter) {  
-    this.filters.set(filter.propertyName, filter);
-    this.refreshTable();
-  }
+  // onChangeFilter(filter: Filter) {  
+  //   this.filters.set(filter.propertyName, filter);
+  //   this.refreshTable();
+  // }
 
-  onClearFilter(filterName: string) {  
-    this.filters.delete(filterName);
-    this.refreshTable();
-  }
+  // onClearFilter(filterName: string) {  
+  //   this.filters.delete(filterName);
+  //   this.refreshTable();
+  // }
 
-  sortData(sort: Sort) {
-    if (!sort.active || sort.direction === '') {
-      return;
-    }
+  // sortData(sort: Sort) {
+  //   if (!sort.active || sort.direction === '') {
+  //     return;
+  //   }
 
-    this.sorting = new Sorter(sort.active, sort.direction);
-    this.refreshTable();
-  }
-
-  onChangePage(pageIndex: number) {
-    debugger;
-    this.pageIndex = pageIndex;
-    this.refreshTable();
-  }
+  //   this.sorting = new Sorter(sort.active, sort.direction);
+  //   this.refreshTable();
+  // }
 }

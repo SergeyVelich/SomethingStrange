@@ -12,8 +12,8 @@ import { ImageModalComponent } from 'src/app/module-shared/components/image-moda
   styleUrls: ['./group-details.component.css']
 })
 export class GroupDetailsComponent implements OnInit {
-  @ViewChild('myModal', {static: false}) imageModal: ImageModalComponent;
-  
+  @ViewChild('myModal', { static: false }) imageModal: ImageModalComponent;
+
   public groupInfo: Group;
   public isImageLoaded: boolean = false;
   public imageToShow: any;
@@ -21,10 +21,10 @@ export class GroupDetailsComponent implements OnInit {
 
   private id: number;
 
-  constructor(private activateRoute: ActivatedRoute, private groupService: GroupService, private authService: AuthService, private fileService: FileService) {
+  constructor(private route: ActivatedRoute, private groupService: GroupService, private authService: AuthService, private fileService: FileService) {
     this.imageAlt = "Place image title";
     this.groupInfo = new Group();
-    activateRoute.params.subscribe(params=>this.id=params['id']); 
+    route.params.subscribe(params => this.id = params['id']);
   }
 
   ngOnInit() {
@@ -39,16 +39,16 @@ export class GroupDetailsComponent implements OnInit {
         this.isImageLoaded = false;
         this.getImageFromService();
       }
-    ); 
+    );
   }
 
   getImageFromService() {
-       if (!this.groupInfo.id) {
+    if (!this.groupInfo.id) {
       return;
     }
     this.isImageLoaded = false;
     this.fileService.getGroupPreview(String(this.groupInfo.id), this.authService.authorizationHeaderValue).subscribe(data => {
-      if(data){
+      if (data) {
         this.createImageFromBlob(data);
         this.isImageLoaded = true;
       }
@@ -68,7 +68,7 @@ export class GroupDetailsComponent implements OnInit {
     }
   }
 
-  openImageModal(){
+  openImageModal() {
     this.imageModal.open();
   }
 }

@@ -7,23 +7,21 @@
             <a [routerLink]="['/groups', groupInfo.id, 'details']" class="post__title_link">{{groupInfo.name}}</a>
           </h2>
           <header class="post__meta">
-            <a href="https://habr.com/ru/users/antoshkka/" class="post__user_link" title="Автор публикации">
-              <img src="//habrastorage.org/getpro/habr/avatars/e9b/82a/c97/e9b82ac97979758d788ad516aa47f577.png"
+            <a href="https://www.facebook.com/tucker.serega" class="post__user_link">
+              <img src="assets/images/user1.png"
                 width="24" height="24" class="user__image_pic user__image_pic_small">
               <span class="post__user user__nickname user__nickname_small">antoshkka</span>
             </a>
             <span class="post__date">{{groupInfo.date | date: 'dd.MM.yyyy' }}</span>
           </header>
           <div class="post__body post__body_preview">
-            <div class="post__text post__text_html">
-              {{groupInfo.description}}
-            </div>
+            <div class="post__text post__text_html" [innerHtml]="groupInfo.description"></div>
             <a class="btn btn_x-large btn_outline_blue post__more_btn"
               [routerLink]="['/groups', groupInfo.id, 'details']">read more →</a>
           </div>
           <ul class="post__tags inline-list">
             <li class="inline-list__item post__tag" *ngFor="let tag of groupInfo.tags">
-              <a href="https://habr.com/ru/company/yandex/" class="inline-list__item_link post__tag_link "
+              <a href="#" class="inline-list__item_link post__tag_link "
                 rel="nofollow">
                 {{tag.name}}</a>
             </li>
@@ -31,130 +29,6 @@
         </article>
       </li>
     </ul>
-
-    <ul class="posts__pagination" id="nav-pagess">
-      <li class="arrows-pagination__item" *ngIf="pageIndex > 1">
-          <a [routerLink]="['/groups/page', pageIndex - 1]" class="arrows-pagination__item-link arrows-pagination__item-link_next" id="previous_page"
-          rel="">←&nbsp;</a>
-      </li>
-      <div class="toggle-menu toggle-menu_pagination">
-        <li class="toggle-menu__item toggle-menu__item_pagination" *ngIf="pageIndex > 2 && pageIndex == pageNumber">
-          <a [routerLink]="['/groups/page', pageIndex - 2]" class="toggle-menu__item-link toggle-menu__item-link_pagination">{{pageIndex-2}}</a>
-        </li>
-        <li class="toggle-menu__item toggle-menu__item_pagination" *ngIf="pageIndex > 1">
-          <a [routerLink]="['/groups/page', pageIndex - 1]" class="toggle-menu__item-link toggle-menu__item-link_pagination">{{pageIndex-1}}</a>
-        </li>
-        <li class="toggle-menu__item toggle-menu__item_pagination">
-          <span
-            class="toggle-menu__item-link toggle-menu__item-link_pagination toggle-menu__item-link_active">{{pageIndex}}
-          </span>
-        </li>
-        <li class="toggle-menu__item toggle-menu__item_pagination" *ngIf="pageNumber >= pageIndex + 1">
-          <a [routerLink]="['/groups/page', pageIndex + 1]" class="toggle-menu__item-link toggle-menu__item-link_pagination">{{pageIndex+1}}</a>
-        </li>
-        <li class="toggle-menu__item toggle-menu__item_pagination" *ngIf="pageNumber >= pageIndex + 2 && pageIndex == 1">
-          <a [routerLink]="['/groups/page', pageIndex + 2]" class="toggle-menu__item-link toggle-menu__item-link_pagination">{{pageIndex+2}}</a>
-        </li>
-      </div>
-      <li class="arrows-pagination__item" *ngIf="pageNumber >= pageIndex + 1">
-        <a [routerLink]="['/groups/page', pageIndex + 1]" class="arrows-pagination__item-link arrows-pagination__item-link_next" id="next_page"
-          rel="">&nbsp;→</a>
-      </li>
-    </ul>
+    <ss-paginator [pageNumber]='pageNumber' [pageIndex]='pageIndex'></ss-paginator>
   </div>
 </div>
-
-<!-- *ngIf="pageIndex > 1 && pageIndex == pageNumber"
-*ngIf="pageIndex > 1"
-*ngIf="pageNumber >= pageIndex + 1"     
-*ngIf="pageNumber >= pageIndex + 2 && pageIndex == 1" -->
-<!-- <mat-card class="form">
-  <div class="filter-leftcolumn">
-    <mat-form-field class="filter-field">
-      <mat-label>Date from</mat-label>
-      <input matInput [(ngModel)]="filterDateFrom" [max]="maxFilterDate" [matDatepicker]="filterDateFromPicker"
-        placeholder="Choose a date" autocomplete="off" (dateChange)="onChangeFilterDateFrom(filterDateFrom)">
-      <mat-datepicker-toggle matSuffix [for]="filterDateFromPicker"></mat-datepicker-toggle>
-      <mat-datepicker #filterDateFromPicker></mat-datepicker>
-      <button mat-button matSuffix mat-icon-button aria-label="Clear"
-        (click)="filterDateFrom=null; onChangeFilterDateFrom(filterDateFrom)">
-        <mat-icon>close</mat-icon>
-      </button>
-    </mat-form-field>
-    <mat-form-field class="filter-field">
-      <mat-label>Date to</mat-label>
-      <input matInput [(ngModel)]="filterDateTo" [min]="minFilterDate" [matDatepicker]="filterDateToPicker"
-        placeholder="Choose a date" autocomplete="off" (dateChange)="onChangeFilterDateTo(filterDateTo)">
-      <mat-datepicker-toggle matSuffix [for]="filterDateToPicker"></mat-datepicker-toggle>
-      <mat-datepicker #filterDateToPicker></mat-datepicker>
-      <button mat-button matSuffix mat-icon-button aria-label="Clear"
-        (click)="filterDateTo=null; onChangeFilterDateTo(filterDateTo)">
-        <mat-icon>close</mat-icon>
-      </button>
-    </mat-form-field>
-  </div>
-  <div class="filter-rightcolumn">
-    <mat-form-field class="filter-field">
-      <mat-label>Name</mat-label>
-      <input matInput name="Name" [(ngModel)]="filterName" (change)="onChangeFilterName($event.target.value)"
-        placeholder="Name" autocomplete="off">
-      <button mat-button matSuffix mat-icon-button aria-label="Clear"
-        (click)="filterName=''; onChangeFilterName(filterName)">
-        <mat-icon>close</mat-icon>
-      </button>
-    </mat-form-field>
-    <mat-form-field class="filter-field">
-      <mat-label>Language</mat-label>
-      <mat-select name="Language" [(ngModel)]="filterLanguage" placeholder="Language"
-        (selectionChange)="onChangeFilterLanguage($event.value)">
-        <mat-option *ngFor="let language of languages" [value]="language.id">{{language.name}}</mat-option>
-      </mat-select>
-      <button mat-button matSuffix mat-icon-button aria-label="Clear"
-        (click)="filterLanguage=0; onChangeFilterLanguage(filterLanguage); $event.stopPropagation()">
-        <mat-icon>close</mat-icon>
-      </button>
-    </mat-form-field>
-  </div>
-  <div class="table-group">
-    <table class="table-sort" matSort matSortActive="name" matSortDirection="desc" matSortDisableClear="true"
-      (matSortChange)="sortData($event)">
-      <thead>
-        <tr>
-          <th mat-sort-header="name" class="tbl2" role="columnheader">Title</th>
-          <th mat-sort-header="date" class="tbl2" role="columnheader">Date</th>
-          <th mat-sort-header="language" class="tbl2" role="columnheader">Lang</th>
-          <th mat-sort-header="description" class="tbl2" role="columnheader">Description</th>
-          <th class="no-sort" role="columnheader">Image</th>
-          <th class="no-sort" role="columnheader"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let groupInfo of groupData">
-          <td class="colName">{{groupInfo.name}}</td>
-          <td class="colDate">{{groupInfo.date | date: 'dd.MM.yyyy' }}</td>
-          <td class="colLang">{{groupInfo.languageName}}</td>
-          <td class="colDesc">{{groupInfo.description}}</td>
-          <td class="colImage">Image</td>
-          <td class="colAction">
-            <button mat-button color="primary">
-              <a [routerLink]="['/groups', groupInfo.id, 'details']">View</a>
-            </button>
-            <button mat-button color="primary">
-              <a [routerLink]="['/groups', groupInfo.id, 'editor']">Edit</a>
-            </button>
-            <button mat-button color="warn" (click)="deleteRecord(groupInfo)">Delete</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-
-
-
-
-</mat-card> -->
-
-<!-- <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
-  (page)="onChangePage($event)">
-</mat-paginator> -->

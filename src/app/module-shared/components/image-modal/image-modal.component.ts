@@ -12,8 +12,6 @@ export class ImageModalComponent implements OnInit {
     @Input() public display: any;
     @Input() public src: any;
     @Input() public innerHTML: any;
-    
-    closeResult: string;
 
     constructor() {}
 

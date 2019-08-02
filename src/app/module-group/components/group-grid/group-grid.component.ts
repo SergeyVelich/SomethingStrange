@@ -5,8 +5,8 @@ import { LanguageService } from '../../services/language.service';
 import { AuthService } from '../../../module-account/services/auth/auth.service';
 import { Filter } from 'src/app/module-shared/models/filter';
 import { Sorter } from 'src/app/module-shared/models/sorter';
-import { Sort } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
+import { Group } from '../../models/group';
 
 @Component({
   selector: 'app-group-grid',
@@ -15,12 +15,12 @@ import { ActivatedRoute } from '@angular/router';
 })
 
 export class GroupGridComponent implements OnInit {
-  public groupData: Array<any>;
+  public groupData: Array<Group>;
 
   //pagening
   public readonly defaultPageSize = 5;
   public readonly defaultPageIndex = 1;
-  public readonly pageSizeOptions: number[] = [5, 10, 25];
+  // public readonly pageSizeOptions: number[] = [5, 10, 25];
 
   pageIndex: number;
   pageSize: number;
@@ -37,11 +37,9 @@ export class GroupGridComponent implements OnInit {
   minFilterDate: Date;
   maxFilterDate: Date;
 
-  public displayedColumns: string[];
-
   constructor(private route: ActivatedRoute, private groupService: GroupService, private languageService: LanguageService, private authService: AuthService) {
-    this.filterName = '';
-    this.filterLanguage = 0;
+    // this.filterName = '';
+    // this.filterLanguage = 0;
     this.pageIndex = this.defaultPageIndex; 
     this.pageSize = this.defaultPageSize;
   }
@@ -71,12 +69,9 @@ export class GroupGridComponent implements OnInit {
     this.groupService.count(this.authService.authorizationHeaderValue, params.filters).subscribe((response: number) => this.pageNumber = Math.ceil(response/this.pageSize));
   };
 
-  public deleteRecord(record) {
-    this.groupService.remove(record, this.authService.authorizationHeaderValue).subscribe(
-      () => {
-        this.refreshTable();
-      });   
-  };
+  trackByFn(index, item) {    
+    return item.id; // уникальный id, соответствующий элементу
+ }
 
   // onChangeFilterName(filterValue: string) {
   //   let name = 'name';

@@ -1,7 +1,7 @@
 <div class="wrapper">
   <div class="posts_list">
     <ul class="content-list content-list_posts shortcuts_items">
-      <li class="content-list__item content-list__item_post shortcuts_item" *ngFor="let groupInfo of groupData">
+      <li class="content-list__item content-list__item_post shortcuts_item" *ngFor="let groupInfo of groupData; trackBy: trackByFn">
         <article class="post" lang="ru">
           <h2 class="post__title">
             <a [routerLink]="['/groups', groupInfo.id, 'details']" class="post__title_link">{{groupInfo.name}}</a>

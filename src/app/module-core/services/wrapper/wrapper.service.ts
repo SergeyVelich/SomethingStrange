@@ -22,7 +22,6 @@ export class Wrapper extends BaseService {
       path: '',
       component: WrapperComponent,
       children: routes,
-      // =canActivate: [AuthenticationGuard],
       // Reuse WrapperComponent instance when navigating between child views
       data: { reuse: true }
     };

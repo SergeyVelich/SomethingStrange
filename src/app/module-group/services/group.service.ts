@@ -18,7 +18,7 @@ export class GroupService extends BaseService {
     super();
   }
 
-  getAll(token: string, filters?: any, sorting?: Sorter, pageIndex?: number, pageSize?: number): Observable<Group[]> {
+  getAll(token: string, pageIndex?: number, filters?: any, sorting?: Sorter, pageSize?: number): Observable<Group[]> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json; charset=utf-8',

@@ -24,7 +24,7 @@ import { AppComponent } from './app.component';
     TestModule,
     HomeModule,
     AccountModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   bootstrap: [AppComponent]
 })

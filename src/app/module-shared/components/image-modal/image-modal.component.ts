@@ -19,7 +19,6 @@ export class ImageModalComponent implements OnInit {
     }
 
     open() {
-      debugger;
       this.imageModal.nativeElement.style.display='block'; 
       this.imageModal.nativeElement.children[1].src = this.src;
       this.imageModal.nativeElement.children[2].innerHTML = this.innerHTML;

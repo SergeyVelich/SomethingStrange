@@ -1,10 +1,10 @@
 <div class="wrapper">
   <div class="posts_list">
     <ul class="content-list content-list_posts shortcuts_items">
-      <li class="content-list__item content-list__item_post shortcuts_item" *ngFor="let groupInfo of groupData; trackBy: trackByFn">
+      <li class="content-list__item content-list__item_post shortcuts_item" *ngFor="let postInfo of postData; trackBy: trackByFn">
         <article class="post" lang="ru">
           <h2 class="post__title">
-            <a [routerLink]="['/groups', groupInfo.id, 'details']" class="post__title_link">{{groupInfo.name}}</a>
+            <a [routerLink]="['/posts', postInfo.id, 'details']" class="post__title_link">{{postInfo.name}}</a>
           </h2>
           <header class="post__meta">
             <a href="https://www.facebook.com/tucker.serega" class="post__user_link">
@@ -12,15 +12,15 @@
                 width="24" height="24" class="user__image_pic user__image_pic_small">
               <span class="post__user user__nickname user__nickname_small">antoshkka</span>
             </a>
-            <span class="post__date">{{groupInfo.date | date: 'dd.MM.yyyy' }}</span>
+            <span class="post__date">{{postInfo.date | date: 'dd.MM.yyyy' }}</span>
           </header>
           <div class="post__body post__body_preview">
-            <div class="post__text post__text_html" [innerHtml]="groupInfo.description"></div>
+            <div class="post__text post__text_html" [innerHtml]="postInfo.previewText"></div>
             <a class="btn btn_x-large btn_outline_blue post__more_btn"
-              [routerLink]="['/groups', groupInfo.id, 'details']">read more →</a>
+              [routerLink]="['/posts', postInfo.id, 'details']">read more →</a>
           </div>
           <ul class="post__tags inline-list">
-            <li class="inline-list__item post__tag" *ngFor="let tag of groupInfo.tags">
+            <li class="inline-list__item post__tag" *ngFor="let tag of postInfo.tags">
               <a href="#" class="inline-list__item_link post__tag_link "
                 rel="nofollow">
                 {{tag.name}}</a>

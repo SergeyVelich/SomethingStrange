@@ -16,7 +16,7 @@ const routes: Routes = [
     { path: 'register', component: RegisterComponent },
     { path: 'auth-callback', component: AuthCallbackComponent },
     { path: 'contacts', loadChildren: '../app/module-contacts/contacts.module#ContactsModule' },
-    { path: 'groups', loadChildren: '../app/module-group/group.module#GroupModule', canActivate: [AuthGuard] },
+    { path: 'posts', loadChildren: '../app/module-post/post.module#PostModule', canActivate: [AuthGuard] },
     
     { path: '**', redirectTo: '/home', pathMatch: 'full' }
   ])

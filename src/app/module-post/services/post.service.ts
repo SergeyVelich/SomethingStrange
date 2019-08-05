@@ -3,7 +3,7 @@ import { HttpClient, HttpParams, HttpRequest } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Group } from 'src/app/module-group/models/group';
+import { Post } from 'src/app/module-post/models/post';
 import { BaseService } from "../../module-shared/services/base.service";
 import { ConfigService } from '../../module-shared/services/config.service';
 import { Sorter } from 'src/app/module-shared/models/sorter';
@@ -12,13 +12,13 @@ import { Sorter } from 'src/app/module-shared/models/sorter';
   providedIn: 'root'
 })
 
-export class GroupService extends BaseService {
+export class PostService extends BaseService {
 
   constructor(private http: HttpClient, private configService: ConfigService) {
     super();
   }
 
-  getAll(token: string, pageIndex?: number, filters?: any, sorting?: Sorter, pageSize?: number): Observable<Group[]> {
+  getAll(token: string, pageIndex?: number, filters?: any, sorting?: Sorter, pageSize?: number): Observable<Post[]> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json; charset=utf-8',
@@ -57,7 +57,7 @@ export class GroupService extends BaseService {
       queryParam = '';
     }
 
-    return this.http.get<Group[]>(this.configService.resourceApiURI + '/group' + queryParam, httpOptions).pipe(catchError(this.handleError));
+    return this.http.get<Post[]>(this.configService.resourceApiURI + '/post' + queryParam, httpOptions).pipe(catchError(this.handleError));
 
     // const headers = new HttpHeaders({
     //   'Content-Type': 'application/json; charset=utf-8',
@@ -87,7 +87,7 @@ export class GroupService extends BaseService {
     //   params: params,
     // };
 
-    // return this.http.get<Group[]>(this.configService.resourceApiURI + '/group', {params, headers}).pipe(catchError(this.handleError));
+    // return this.http.get<Post[]>(this.configService.resourceApiURI + '/post', {params, headers}).pipe(catchError(this.handleError));
   }
   count(token: string, filters?: any): Observable<number> {
     const httpOptions = {
@@ -110,18 +110,18 @@ export class GroupService extends BaseService {
       queryParam = '';
     }
 
-    return this.http.get<number>(this.configService.resourceApiURI + '/group/count' + queryParam, httpOptions).pipe(catchError(this.handleError));
+    return this.http.get<number>(this.configService.resourceApiURI + '/post/count' + queryParam, httpOptions).pipe(catchError(this.handleError));
   }
-  getById(groupId: number, token: string): Observable<Group> {
+  getById(postId: number, token: string): Observable<Post> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json; charset=utf-8',
         'Authorization': token,
       })
     };
-    return this.http.get<Group>(this.configService.resourceApiURI + '/group/get?id=' + groupId, httpOptions).pipe(catchError(this.handleError));
+    return this.http.get<Post>(this.configService.resourceApiURI + '/post/get?id=' + postId, httpOptions).pipe(catchError(this.handleError));
   }
-  create(group: Group, files: any, token: string): Observable<Group> {
+  create(post: Post, files: any, token: string): Observable<Post> {
     const httpOptions = {
       headers: new HttpHeaders({
         // 'Content-Type': 'application/json; charset=utf-8',
@@ -130,16 +130,16 @@ export class GroupService extends BaseService {
     };
 
     let body = new FormData();
-    body.append("group", JSON.stringify(group));
+    body.append("post", JSON.stringify(post));
     if(files){
       for (let file of files) {
         body.append(file.name, file);
       }
     }
 
-    return this.http.post<Group>(this.configService.resourceApiURI + '/group/create', body, httpOptions).pipe(catchError(this.handleError));
+    return this.http.post<Post>(this.configService.resourceApiURI + '/post/create', body, httpOptions).pipe(catchError(this.handleError));
   }
-  update(group: Group, files: any, token: string): Observable<Group> {
+  update(post: Post, files: any, token: string): Observable<Post> {
     const httpOptions = {
       headers: new HttpHeaders({
         // 'Content-Type': 'multipart/form-data',
@@ -148,22 +148,22 @@ export class GroupService extends BaseService {
     };
 
     let body = new FormData();
-    body.append("group", JSON.stringify(group));
+    body.append("post", JSON.stringify(post));
     if(files){
       for (let file of files) {
         body.append(file.name, file);
       }
     }
 
-    return this.http.put<Group>(this.configService.resourceApiURI + '/group/update', body, httpOptions).pipe(catchError(this.handleError));
+    return this.http.put<Post>(this.configService.resourceApiURI + '/post/update', body, httpOptions).pipe(catchError(this.handleError));
   }
-  remove(group: Group, token: string): Observable<number> {
+  remove(post: Post, token: string): Observable<number> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json; charset=utf-8',
         'Authorization': token,
       })
     };
-    return this.http.delete<number>(this.configService.resourceApiURI + '/group/delete?id=' + group.id, httpOptions).pipe(catchError(this.handleError));
+    return this.http.delete<number>(this.configService.resourceApiURI + '/post/delete?id=' + post.id, httpOptions).pipe(catchError(this.handleError));
   }
 }  

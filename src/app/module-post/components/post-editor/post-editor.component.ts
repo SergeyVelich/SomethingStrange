@@ -1,23 +1,23 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Group } from '../../models/group';
+import { Post } from '../../models/post';
 import { Language } from '../../models/language';
 import { LanguageService } from '../../services/language.service';
 import { AuthService } from '../../../module-account/services/auth/auth.service';
 import { FileService } from '../../../module-shared/services/file.service';
-import { GroupService } from '../../services/group.service';
+import { PostService } from '../../services/post.service';
 import { ActivatedRoute } from '@angular/router';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 @Component({
-  selector: 'app-group-editor',
-  templateUrl: './group-editor.component.html',
-  styleUrls: ['./group-editor.component.css']
+  selector: 'app-post-editor',
+  templateUrl: './post-editor.component.html',
+  styleUrls: ['./post-editor.component.css']
 })
-export class GroupEditorComponent implements OnInit, OnDestroy {
+export class PostEditorComponent implements OnInit, OnDestroy {
 
   languages: Language[];
 
-  public groupInfo: Group;
+  public postInfo: Post;
   public message: string;
   public files: any;
   public isImageLoaded: boolean = false;
@@ -69,13 +69,13 @@ export class GroupEditorComponent implements OnInit, OnDestroy {
     toolbarPosition: 'top',
   };
 
-  constructor(private activateRoute: ActivatedRoute, private groupService: GroupService, private languageService: LanguageService, private authService: AuthService, private fileService: FileService) {
-    this.groupInfo = new Group();
+  constructor(private activateRoute: ActivatedRoute, private PostService: PostService, private languageService: LanguageService, private authService: AuthService, private fileService: FileService) {
+    this.postInfo = new Post();
     activateRoute.params.subscribe(params => this.id = params['id']);
   }
 
   ngOnInit() {
-    this.setInitialValuesForGroupData(this.id);
+    this.setInitialValuesForPostData(this.id);
 
     this.languageService.getAll(this.authService.authorizationHeaderValue).subscribe((response: any) => {
       this.languages = response;
@@ -83,37 +83,37 @@ export class GroupEditorComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(){
-    this.groupInfo = null;
+    this.postInfo = null;
   }
 
-  private setInitialValuesForGroupData(id: number) {
+  private setInitialValuesForPostData(id: number) {
     if (id == 0) {
-      this.groupInfo = new Group();
+      this.postInfo = new Post();
       return;
     }
 
-    this.groupService.getById(this.id, this.authService.authorizationHeaderValue).subscribe(
-      (response: Group) => {
+    this.PostService.getById(this.id, this.authService.authorizationHeaderValue).subscribe(
+      (response: Post) => {
         this.message = null;
         this.files = null;
         this.imageToShow = null;
         this.isImageLoaded = false;
-        this.groupInfo = response;
+        this.postInfo = response;
         this.getImageFromService();
       }
     );
   }
 
   public newRecord() {
-    this.setInitialValuesForGroupData(0);
+    this.setInitialValuesForPostData(0);
   }
 
   public saveRecord = function (event) {
-    if (this.groupInfo.id) {
-      this.groupService.update(this.groupInfo, this.files, this.authService.authorizationHeaderValue).subscribe();
+    if (this.postInfo.id) {
+      this.PostService.update(this.postInfo, this.files, this.authService.authorizationHeaderValue).subscribe();
     }
     else {
-      this.groupService.create(this.groupInfo, this.files, this.authService.authorizationHeaderValue).subscribe();
+      this.PostService.create(this.postInfo, this.files, this.authService.authorizationHeaderValue).subscribe();
     }
   };
 
@@ -138,11 +138,11 @@ export class GroupEditorComponent implements OnInit, OnDestroy {
   }
 
   getImageFromService() {
-    if (!this.groupInfo.id) {
+    if (!this.postInfo.id) {
       return;
     }
     this.isImageLoaded = false;
-    this.fileService.getGroupPreview(String(this.groupInfo.id), this.authService.authorizationHeaderValue).subscribe(data => {
+    this.fileService.getPostPreview(String(this.postInfo.id), this.authService.authorizationHeaderValue).subscribe(data => {
       if (data) {
         this.createImageFromBlob(data);
         this.isImageLoaded = true;

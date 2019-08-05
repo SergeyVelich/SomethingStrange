@@ -1,15 +1,15 @@
 <ul class="posts__pagination" id="nav-pagess">
     <li class="arrows-pagination__item" *ngIf="pageIndex > 1">
-        <a [routerLink]="['/groups/page', pageIndex - 1]"
+        <a [routerLink]="['/posts/page', pageIndex - 1]"
             class="arrows-pagination__item-link arrows-pagination__item-link_next" id="previous_page" rel="">←&nbsp;</a>
     </li>
     <div class="toggle-menu toggle-menu_pagination">
         <li class="toggle-menu__item toggle-menu__item_pagination" *ngIf="pageIndex > 2 && pageIndex == pageNumber">
-            <a [routerLink]="['/groups/page', pageIndex - 2]"
+            <a [routerLink]="['/posts/page', pageIndex - 2]"
                 class="toggle-menu__item-link toggle-menu__item-link_pagination">{{pageIndex-2}}</a>
         </li>
         <li class="toggle-menu__item toggle-menu__item_pagination" *ngIf="pageIndex > 1">
-            <a [routerLink]="['/groups/page', pageIndex - 1]"
+            <a [routerLink]="['/posts/page', pageIndex - 1]"
                 class="toggle-menu__item-link toggle-menu__item-link_pagination">{{pageIndex-1}}</a>
         </li>
         <li class="toggle-menu__item toggle-menu__item_pagination">
@@ -18,17 +18,17 @@
             </span>
         </li>
         <li class="toggle-menu__item toggle-menu__item_pagination" *ngIf="pageNumber >= pageIndex + 1">
-            <a [routerLink]="['/groups/page', pageIndex + 1]"
+            <a [routerLink]="['/posts/page', pageIndex + 1]"
                 class="toggle-menu__item-link toggle-menu__item-link_pagination">{{pageIndex+1}}</a>
         </li>
         <li class="toggle-menu__item toggle-menu__item_pagination"
             *ngIf="pageNumber >= pageIndex + 2 && pageIndex == 1">
-            <a [routerLink]="['/groups/page', pageIndex + 2]"
+            <a [routerLink]="['/posts/page', pageIndex + 2]"
                 class="toggle-menu__item-link toggle-menu__item-link_pagination">{{pageIndex+2}}</a>
         </li>
     </div>
     <li class="arrows-pagination__item" *ngIf="pageNumber >= pageIndex + 1">
-        <a [routerLink]="['/groups/page', pageIndex + 1]"
+        <a [routerLink]="['/posts/page', pageIndex + 1]"
             class="arrows-pagination__item-link arrows-pagination__item-link_next" id="next_page" rel="">&nbsp;→</a>
     </li>
 </ul>

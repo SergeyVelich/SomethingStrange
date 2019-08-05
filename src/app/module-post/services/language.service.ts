@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Language } from 'src/app/module-group/models/language';
+import { Language } from '../models/language';
 import { BaseService } from "../../module-shared/services/base.service";
 import { ConfigService } from '../../module-shared/services/config.service';
 

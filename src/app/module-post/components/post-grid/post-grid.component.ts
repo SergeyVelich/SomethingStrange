@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { GroupService } from '../../services/group.service'
+import { PostService } from '../../services/post.service'
 import { AuthService } from '../../../module-account/services/auth/auth.service';
 import { ActivatedRoute } from '@angular/router';
-import { Group } from '../../models/group';
+import { Post } from '../../models/post';
 
 @Component({
-  selector: 'app-group-grid',
-  templateUrl: './group-grid.component.html',
-  styleUrls: ['./group-grid.component.css']
+  selector: 'app-post-grid',
+  templateUrl: './post-grid.component.html',
+  styleUrls: ['./post-grid.component.css']
 })
 
-export class GroupGridComponent implements OnInit {
-  public groupData: Array<Group>;
+export class PostGridComponent implements OnInit {
+  public postData: Array<Post>;
 
   //pagening
   public readonly defaultPageSize = 5;
@@ -21,19 +21,19 @@ export class GroupGridComponent implements OnInit {
   pageSize: number;
   pageNumber: number;
 
-  constructor(private route: ActivatedRoute, private groupService: GroupService, private authService: AuthService) { }
+  constructor(private route: ActivatedRoute, private PostService: PostService, private authService: AuthService) { }
 
   ngOnInit() {
     this.route.data.subscribe(
       (response) => {
-        this.groupData = response.profile;
+        this.postData = response.profile;
       }
     );
 
     this.pageSize = this.defaultPageSize;
     this.route.params.subscribe(params => this.pageIndex = +params['pageId'] || this.defaultPageIndex);
 
-    this.groupService.count(this.authService.authorizationHeaderValue).subscribe((response: number) => this.pageNumber = Math.ceil(response / this.pageSize));
+    this.PostService.count(this.authService.authorizationHeaderValue).subscribe((response: number) => this.pageNumber = Math.ceil(response / this.pageSize));
   }
 
   trackByFn(index, item) {

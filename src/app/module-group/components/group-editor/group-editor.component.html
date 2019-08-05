@@ -1,5 +1,9 @@
+
+
 <mat-card class=form>
-  <mat-card-header>
+    <input matInput type="text" placeholder="Name" [(ngModel)]="groupInfo.name" name="name" autocomplete="off" required>
+    <angular-editor [placeholder]="'Enter text here...'" [(ngModel)]="groupInfo.description" [config]="config"></angular-editor> <!--https://www.npmjs.com/package/angular-html-editor-->
+  <!-- <mat-card-header>
     <div mat-card-avatar class="form-header-image"></div>
     <mat-card-title *ngIf="groupInfo.id === 0">Add record</mat-card-title>
     <mat-card-title *ngIf="groupInfo.id != 0">Edit record</mat-card-title>
@@ -52,12 +56,13 @@
       <button mat-button type="button" class="btn btn-info mat-card-actions-rightcolumn"
         (click)="saveRecord($event)">{{buttonTextSave}}</button>
     </div>
-  </mat-card-actions>
+  </mat-card-actions> -->
 </mat-card>
 
 <!-- The Modal -->
-<div #myModal class="modal">
+<!-- <div #myModal class="modal">
   <span class="close" (click)="myModal.style.display = 'none'">&times;</span>
   <img #modalImg class="modal-content">
   <div #caption class="caption"></div>
-</div>
+</div> -->
+

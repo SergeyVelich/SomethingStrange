@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 import { SharedModule } from '../module-shared/shared.module';
 
@@ -17,6 +18,7 @@ import { GroupEditorComponent } from './components/group-editor/group-editor.com
   imports: [
     SharedModule,
     GroupRoutingModule,
+    AngularEditorModule
   ],
 })
 export class GroupModule { }
